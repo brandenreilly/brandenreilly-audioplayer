@@ -45,17 +45,17 @@ const Home = () => {
 		<div>
 			{songList.map((song,index)=>{
 			return (
-				<SongSelector song={song} index={index} playAudio={playAudio} key={index} />
+				<SongSelector isPlaying={isPlaying} song={song} index={index} playAudio={playAudio} key={index} />
 				)
 			})}
 		
 			<footer className="text-center fixed-bottom">
 				<div className="MediaRow row d-flex justify-content-center">
 					<div className="col">
-						<button className="btn" onClick={()=>{playAudio(currentSong - 1)}}><i className="fas fa-backward fa-lg"></i></button>
-						<button className="btn" style={{display: isPlaying ? "none" : ""}} onClick={()=>{playAudio(currentSong)}}><i class="fas fa-play fa-lg"></i></button>
-						<button className="btn" style={{display: isPlaying ? "" : "none"}} onClick={()=>{pauseAudio()}}><i class="fas fa-pause-circle fa-lg"></i></button>
-						<button className="btn" onClick={()=>{playAudio(currentSong + 1)}}><i className="fas fa-forward fa-lg"></i></button>
+						<button className="btn MediaIcons" onClick={()=>{playAudio(currentSong - 1)}}><i className="fas fa-backward fa-lg"></i></button>
+						<button className="btn MediaIcons" style={{display: isPlaying ? "none" : ""}} onClick={()=>{playAudio(currentSong)}}><i class="fas fa-play fa-lg"></i></button>
+						<button className="btn MediaIcons" style={{display: isPlaying ? "" : "none"}} onClick={()=>{pauseAudio()}}><i class="fas fa-pause-circle fa-lg"></i></button>
+						<button className="btn MediaIcons" onClick={()=>{playAudio(currentSong + 1)}}><i className="fas fa-forward fa-lg"></i></button>
 					</div>
 				</div>
 				<audio ref={(e)=>audioRef=e}></audio>
