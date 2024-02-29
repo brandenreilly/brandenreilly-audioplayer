@@ -1,12 +1,37 @@
+body {
+    background: black;
+    color: white;
+}
 
-/* 
-
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+.selector {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+}
+.selector:hover {
+    background: rgb(74, 74, 74);
+}
+.selector:focus {
+    background: aqua;
+}
+.songList {
+    font-size: 20px;
+    margin: auto 0px;
+}
+.songPosition {
+    color: gray;
+    margin-left: 10px;
+}
+.songName {
+    margin-left: 30px;
+}
+.MediaRow {
+    background-color: rgb(74, 74, 74);
+} 
+.MediaIcons {
+    color: white;
+}
