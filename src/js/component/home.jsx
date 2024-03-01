@@ -3,7 +3,7 @@ import SongSelector from "./selector.jsx"
 
 const Home = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
-
+	const [isLooping, setIsLooping] = useState(false)
 	/* var myAudioObject = new Audio();
 	for (var key in myAudioObject){
    		if (typeof myAudioObject[key] === "number"){
@@ -40,8 +40,12 @@ const Home = () => {
 			}
 		}
 		const repeatSong = () => {
-			if(audioRef.currentTime === audioRef.duration){
-				audioRef.play(currentSong)
+			if(isLooping == false){
+				audioRef.loop = true
+				setIsLooping(true)
+			} else if(isLooping == true){
+				audioRef.loop = false
+				setIsLooping(false)
 			}
 		}
 		var currentSong = 0;
@@ -68,7 +72,6 @@ const Home = () => {
 					"https://assets.breatheco.de/apis/sound/files/cartoons/songs/x-men.mp3"
 			}
 		]
-		
 		return (
 		<div>
 			{songList.map((song,index)=>{
@@ -78,7 +81,7 @@ const Home = () => {
 			})}
 		
 			<footer className="text-center fixed-bottom">
-				<div className="MediaRow row d-flex justify-content-center">
+				<div className="MediaRow row d-flex align-items-center justify-content-center">
 					<div className="col-3">
 					<button className="btn MediaIcons" onClick={()=>{repeatSong()}}><i class="fas fa-redo fa-lg"></i></button>
 					</div>
@@ -87,6 +90,7 @@ const Home = () => {
 						<button className="btn MediaIcons" style={{display: isPlaying ? "none" : ""}} onClick={()=>{playAudio(currentSong)}}><i class="fas fa-play fa-lg"></i></button>
 						<button className="btn MediaIcons" style={{display: isPlaying ? "" : "none"}} onClick={()=>{pauseAudio()}}><i class="fas fa-pause-circle fa-lg"></i></button>
 						<button className="btn MediaIcons" onClick={()=>{playAudio(currentSong + 1)}}><i className="fas fa-forward fa-lg"></i></button>
+						<input type="range" className="timeline" max={"100"} value={"0"}></input>
 					</div>
 					<div className="col-4">
 						<button className="btn MediaIcons" onClick={()=>{lowerVolume()}}><i class="fas fa-volume-down fa-lg"></i></button>

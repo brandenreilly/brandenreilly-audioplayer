@@ -35,3 +35,21 @@ body {
 .MediaIcons {
     color: white;
 }
+.timeline::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+  }
+  .timeline:hover::-webkit-slider-thumb {
+    opacity: 1;
+  }
+  .timeline::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
