@@ -13,10 +13,10 @@ body {
     cursor: pointer;
 }
 .selector:hover {
-    background: rgb(74, 74, 74);
+    background: rgba(74, 74, 74, 0.5);
 }
 .selector:focus {
-    background: aqua;
+    background: rgb(74, 74, 74);
 }
 .songList {
     font-size: 20px;
