@@ -1,17 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import SongSelector from "./selector.jsx"
 
 const Home = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isLooping, setIsLooping] = useState(false)
-	/* var myAudioObject = new Audio();
-	for (var key in myAudioObject){
+	// useEffect(()=>{setInterval(console.log(audioRef.currentTime), 1000)})
+	// var myAudioObject = new Audio();
+	/* for (var key in myAudioObject){
    		if (typeof myAudioObject[key] === "number"){
        console.log(key);
    		}
-		else if (typeof myAudioObject[key] === "function"){
-			console.log(key)
-		}
 	} */
 		var audioRef = null
 		var currentSong = 0;
@@ -72,6 +70,11 @@ const Home = () => {
 					"https://assets.breatheco.de/apis/sound/files/cartoons/songs/x-men.mp3"
 			}
 		]
+		const getPercentOfSong = () => {
+			const percentagePosition = (100*audioRef.currentTime) / audioRef.duration;
+			console.log(percentagePosition)
+		}
+		var timeline = useRef(null)
 		return (
 		<div>
 			{songList.map((song,index)=>{
@@ -90,14 +93,18 @@ const Home = () => {
 						<button className="btn MediaIcons" style={{display: isPlaying ? "none" : ""}} onClick={()=>{playAudio(currentSong)}}><i class="fas fa-play fa-lg"></i></button>
 						<button className="btn MediaIcons" style={{display: isPlaying ? "" : "none"}} onClick={()=>{pauseAudio()}}><i class="fas fa-pause-circle fa-lg"></i></button>
 						<button className="btn MediaIcons" onClick={()=>{playAudio(currentSong + 1)}}><i className="fas fa-forward fa-lg"></i></button>
-						<input type="range" className="timeline" max={"100"} value={"0"}></input>
+						<input type="range" className="timeline" max={"100"} value={"0"} onChange={()=>{
+							console.log(audioRef.currentTime);
+							getPercentOfSong()
+							}} ref={timeline}></input>
+							<button className="btn MediaIcons" onClick={()=>{getPercentOfSong();console.log(audioRef.duration)}}>Test</button>
 					</div>
 					<div className="col-4">
 						<button className="btn MediaIcons" onClick={()=>{lowerVolume()}}><i class="fas fa-volume-down fa-lg"></i></button>
 						<button className="btn MediaIcons" onClick={()=>{raiseVolume()}}><i class="fas fa-volume-up fa-lg"></i></button>
 					</div>
 				</div>
-				<audio controls ref={(e)=>audioRef=e}></audio>
+				<audio ref={(e)=>audioRef=e}></audio>
 			</footer> 
 		</div>
 	);
