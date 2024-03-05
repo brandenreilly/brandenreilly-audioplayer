@@ -1,20 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
-import SongSelector from "./selector.jsx"
 
 const Home = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isLooping, setIsLooping] = useState(false)
-	// useEffect(()=>{setInterval(console.log(audioRef.currentTime), 1000)})
-	// var myAudioObject = new Audio();
-	/* for (var key in myAudioObject){
-   		if (typeof myAudioObject[key] === "number"){
-       console.log(key);
-   		}
-	} */
+	const [newSongList, setNewSongList] = useState([])
+	useEffect(()=>{
+		fetch("https://playground.4geeks.com/apis/fake/sound/songs")
+		.then(resp => resp.json())
+		.then(data => setNewSongList(data))
+	}, [])
 		var audioRef = null
 		var currentSong = 0;
 		const playAudio = (index) => {
-			audioRef.src=songList[index].url
+			audioRef.src= "https://assets.breatheco.de/apis/sound/" + newSongList[index].url
 			audioRef.play()
 			currentSong = index
 			setIsPlaying(true)
@@ -46,30 +44,8 @@ const Home = () => {
 				setIsLooping(false)
 			}
 		}
+		
 		var currentSong = 0;
-		let songList = [
-			{
-				title: "South Park",
-				id: "south-park",
-				author: "Kyle",
-				url:
-					"https://assets.breatheco.de/apis/sound/files/cartoons/songs/south-park.mp3"
-			},
-			{
-				title: "Thunder Cats",
-				id: "thundercats",
-				author: "Moonra",
-				url:
-					"https://assets.breatheco.de/apis/sound/files/cartoons/songs/thundercats.mp3"
-			},
-			{
-				title: "X-Men",
-				id: "x-men",
-				author: "Profesor",
-				url:
-					"https://assets.breatheco.de/apis/sound/files/cartoons/songs/x-men.mp3"
-			}
-		]
 		const getPercentOfSong = () => {
 			const percentagePosition = (100*audioRef.currentTime) / audioRef.duration;
 			console.log(percentagePosition)
@@ -77,9 +53,12 @@ const Home = () => {
 		var timeline = useRef(null)
 		return (
 		<div>
-			{songList.map((song,index)=>{
+			{newSongList.map((song,index)=>{
 			return (
-				<SongSelector isPlaying={isPlaying} song={song} index={index} playAudio={playAudio} key={index} currentSong={currentSong} />
+				<div key={index} onClick={()=>{playAudio(index)}} tabIndex={0} className="selector">
+            		<p className="songList songPosition" ><strong>{index + 1}</strong></p>
+            		<p className="songList songName">{song.name} -</p>
+        		</div>
 				)
 			})}
 		

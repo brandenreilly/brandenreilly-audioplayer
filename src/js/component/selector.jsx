@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { isPlaying } from "./home";
 
+
+// Moved to "/home.jsx"
+// Didn't need another component.
+
+
 const SongSelector = (props) => { 
     
     return (
